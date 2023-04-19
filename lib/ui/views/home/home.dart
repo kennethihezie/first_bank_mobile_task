@@ -40,7 +40,10 @@ class _HomeState extends State<Home> {
         title: "User Details",
         isActionEnabled: false,
         isHome: true,
-        callback: () => context.go(MobileAssessmentRoutes.login)
+        callback: () {
+          AppNotification.success(message: 'Logged out successfully', context: context);
+          context.go(MobileAssessmentRoutes.login);
+        }
       ),
 
       body: BlocConsumer<HomeCubit, HomeState>(
@@ -53,8 +56,8 @@ class _HomeState extends State<Home> {
 
             case HomeStatus.success:
               Future.delayed(const Duration(), () {
+                AppNotification.success(message: 'You are eligible for a loan', context: context);
                 context.push(MobileAssessmentRoutes.successPage, extra: user);
-                // AppNotification.success(message: 'You are eligible for a loan', context: context);
                 _isBusy = false;
                 context.read<HomeCubit>().emit(state.copyWith(status: HomeStatus.initial));
               });
@@ -65,6 +68,7 @@ class _HomeState extends State<Home> {
                 AppNotification.error(
                     message: 'You are not eligible.', context: context);
                 _isBusy = false;
+                context.read<HomeCubit>().emit(state.copyWith(status: HomeStatus.initial));
               });
               break;
 

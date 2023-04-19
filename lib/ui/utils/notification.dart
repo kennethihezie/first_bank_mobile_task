@@ -12,17 +12,17 @@ class AppNotification {
       {required message, required BuildContext context}) {
     Flushbar flush = Flushbar(
       shouldIconPulse: true,
-      titleText: Text(
+      titleText: const Text(
         'Success',
         style: TextStyle(
             fontSize: 12,
-            color: Theme.of(context).backgroundColor,
+            color: Colors.white,
             fontWeight: FontWeight.bold),
       ),
       messageText: Text(
         message,
         style:
-        TextStyle(fontSize: 12, color: Theme.of(context).backgroundColor),
+        const TextStyle(fontSize: 12, color: Colors.white),
       ),
       backgroundColor: Colors.greenAccent.shade200,
       flushbarPosition: FlushbarPosition.TOP,
@@ -31,7 +31,7 @@ class AppNotification {
       icon: const Icon(
         Icons.check,
         size: 20,
-        color: Colors.green,
+        color: Colors.white,
       ),
       duration: const Duration(milliseconds: 2500),
       animationDuration: const Duration(milliseconds: 1000),
